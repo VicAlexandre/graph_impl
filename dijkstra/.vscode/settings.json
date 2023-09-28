@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "graph.h": "c",
+        "stdio.h": "c",
+        "heap.h": "c",
+        "unistd.h": "c"
+    }
+}
