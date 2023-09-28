@@ -88,27 +88,34 @@ int main(int argc, char **argv)
     }
 
     int n, m;
-    scanf("%d %d", &n, &m);
+    fscanf(fin, "%d %d", &n, &m);
     Graph *g = graph_init(n);
 
     for (int i = 0; i < m; i++)
     {
         int u, v, weight;
-        scanf("%d %d %d", &u, &v, &weight);
+        fscanf(fin, "%d %d %d", &u, &v, &weight);
         graph_add_edge(g, u, v, weight);
     }
+
+    fclose(fin);
 
     unsigned int *dist = dijkstra(g, starting_vertex);
     for (int i = 0; i < graph_num_vertices(g); i++)
     {
         if (dist[i] == INT_MAX)
             dist[i] = -1;
+        if (oflag)
+        {
+            fprintf(fout, "%d:%d ", i + 1, dist[i]);
+            continue;
+        }
         printf("%d:%d ", i + 1, dist[i]);
     }
     printf("\n");
 
-    fclose(fin);
-    fclose(fout);
+    if (fout)
+        fclose(fout);
     free(dist);
     graph_free(&g);
 
