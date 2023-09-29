@@ -19,6 +19,8 @@ unsigned int *dijkstra(Graph *g, int src)
     dist[src - 1] = 0;
 
     MinHeap *heap = min_heap_init(graph_num_vertices(g), dist);
+    if (heap == NULL)
+        return -1;
 
     while (!min_heap_is_empty(heap))
     {
@@ -55,7 +57,7 @@ int main(int argc, char **argv)
         switch (c)
         {
         case 'h':
-            printf("-h\t\t: displays this help and exits\n-o <file>\t: redirects output to file\n-f <file>\t: indicates the file that contains the graph \n-i\t\t: starting vertex\n");
+            printf("-h\t\t: displays this help and exits\n-o <file>\t: redirects output to file\n-f <file>\t: indicates the file that contains the graph \n-i\t\t: starting vertex. default: 1\n");
             return 0;
             break;
 

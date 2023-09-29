@@ -9,7 +9,7 @@ typedef struct node AdjNode;
 
 typedef struct graph Graph;
 
-/// @brief Create a graph with num_vertices vertices
+/// @brief Creates a graph with num_vertices vertices
 /// @param num_vertices The number of vertices in the graph
 /// @return The initialized graph
 Graph *graph_init(int num_vertices);
