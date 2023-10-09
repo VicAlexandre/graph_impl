@@ -30,6 +30,12 @@ int min_heap_is_full(MinHeap *heap);
 /// @param heap
 void min_heap_free(MinHeap **heap);
 
+/// @brief Inserts a new vertex in the heap and heapifies it.
+/// @param heap
+/// @param vertex
+/// @param value
+/// @note If the heap is full or NULL, the function returns without doing
+/// anything.
 void min_heap_insert(MinHeap *heap, int vertex, int value);
 
 /// @brief Extracts the heap's root, calls heapify and returns the root's value.

@@ -1,7 +1,13 @@
+/*
+ * Dijkstra's algorithm implementation
+ * Input: a graph G = (V, E) and a source vertex s
+ * Output: the shortest path from s to all other vertices
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <bits/getopt_core.h>
+#include <unistd.h>
 #include "heap.h"
 #include "graph.h"
 
@@ -50,7 +56,7 @@ int main(int argc, char **argv)
 {
     char *output_file_name = NULL, *input_file_name = NULL;
     FILE *fin = NULL, *fout = NULL;
-    int c, oflag = 0, iflag = 0, starting_vertex = 1;
+    int c, oflag = 0, starting_vertex = 1;
 
     while ((c = getopt(argc, argv, "ho:f:i:")) != -1)
     {
@@ -70,7 +76,6 @@ int main(int argc, char **argv)
         case 'f':
             input_file_name = optarg;
             fin = fopen(input_file_name, "r");
-            iflag = 1;
             break;
 
         case 'i':
@@ -81,12 +86,6 @@ int main(int argc, char **argv)
             return 1;
             break;
         }
-    }
-
-    if (!iflag)
-    {
-        printf("ERROR: no input file provided\n");
-        return 1;
     }
 
     int n, m;
