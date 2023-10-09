@@ -1,6 +1,5 @@
 # Graph algorithms implementations
-Implementations of four graph algorithms: Dijkstra's shortest path, Prim's and Kruskal's minimum spanning tree and ??? for the course
-COMP369 - Teoria dos Grafos (Graph theory).
+Implementations of four graph algorithms: Dijkstra's shortest path, Prim's and Kruskal's minimum spanning tree and ??? for the course COMP369 - Teoria dos Grafos (Graph theory).
 
 ### Input file format
 The input file format is as follows:
@@ -15,11 +14,11 @@ The input file format is as follows:
 ### Done:
 - [x] Dijkstra's shortest path
 - [x] Prim's minimum spanning tree
+- [x] Kruskal's minimum spanning tree
 
 ### To do:
-- [ ] Kruskal's minimum spanning tree
-- [ ] ???
 - [ ] Heap optimization using a second array to store the heap indexes of each vertex
+- [ ] Fourth algorithm (To be defined)
 
 ## Algorithms' usage
 
@@ -37,7 +36,7 @@ Options:
 -f <file>       : indicates the file that contains the graph 
 -i              : starting vertex. default: 1
 ```
-### Prim's Minimum Spanning Tree
+### Prim's and Kruskal's Minimum Spanning Tree
 To build and run:
 ```bash
 cd prim

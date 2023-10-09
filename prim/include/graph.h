@@ -43,10 +43,20 @@ int graph_num_vertices(Graph *g);
 /// @return The adjacency list N+(V)
 AdjNode *graph_adj_list(Graph *g, int v);
 
+/// @brief Returns the adjacency list of a vertex v
+/// @param g The graph G
+/// @param v The vertex
+/// @return The adjacency list N-(V)
 int graph_adj_vertex(AdjNode *n);
 
+/// @brief Returns the weight of an edge uv
+/// @param n The adjacency list node
+/// @return The weight w(u,v) of the edge uv
 int graph_adj_weight(AdjNode *n);
 
+/// @brief Returns the next node in the adjacency list
+/// @param n The adjacency list node
+/// @return The next node in the adjacency list
 AdjNode *graph_adj_next(AdjNode *n);
 
 #endif

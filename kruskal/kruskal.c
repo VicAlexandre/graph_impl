@@ -1,59 +1,41 @@
 /*
- * Prim's algorithm implementation
+ * Kruskal's algorithm for finding the minimum spanning tree of a graph
  * Input: a graph G = (V, E) and a source vertex s
  * Output: the MSP of G or it's cost
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <unistd.h>
-#include "heap.h"
+#include "union_find.h"
 #include "graph.h"
+#include "quicksort.h"
 
-unsigned int prim(Graph *g, unsigned int *msp, int src)
+int kruskal(Graph *g, Edge *msp, int s)
 {
-    unsigned int msp_cost = 0;
-    unsigned int cost[graph_num_vertices(g)];
-    int prev[graph_num_vertices(g)];
+    int parent[graph_num_vertices(g)];
+    int rank[graph_num_vertices(g)];
+    Edge *edges = graph_get_edges(g);
+    int msp_cnt = 0, msp_cost = 0;
+
+    quick_sort(edges, 0, graph_num_edges(g) - 1);
 
     for (int i = 0; i < graph_num_vertices(g); i++)
+        make_set(i, parent, rank);
+
+    for (int i = 0; i < graph_num_edges(g); i++)
     {
-        msp[i] = 0;
-        cost[i] = INT_MAX;
-        prev[i] = -1;
-    }
+        int u = edges[i].u;
+        int v = edges[i].v;
 
-    cost[src - 1] = 0;
-
-    MinHeap *heap = min_heap_init(graph_num_vertices(g), cost);
-    if (heap == NULL)
-        return -1;
-
-    while (!min_heap_is_empty(heap))
-    {
-        unsigned int u = min_heap_extract_min(heap);
-        AdjNode *aux = graph_adj_list(g, u);
-
-        msp[u] = prev[u];
-        msp_cost += cost[u];
-
-        while (aux)
+        if (find(u, parent) != find(v, parent))
         {
-            int v = graph_adj_vertex(aux) - 1;
-            int w = graph_adj_weight(aux);
-
-            if (!msp[v] && cost[v] > w)
-            {
-                prev[v] = u;
-                cost[v] = w;
-                min_heap_update_priority(heap, v, cost[v]);
-            }
-
-            aux = graph_adj_next(aux);
+            msp[msp_cnt++] = edges[i];
+            msp_cost += edges[i].w;
+            join(find(u, parent), find(v, parent), parent, rank);
         }
     }
-    min_heap_free(&heap);
+
     return msp_cost;
 }
 
@@ -98,19 +80,19 @@ int main(int argc, char **argv)
 
     int n, m;
     fscanf(fin, "%d %d", &n, &m);
-    Graph *g = graph_init(n);
+    Graph *g = graph_init(n, m);
 
     for (int i = 0; i < m; i++)
     {
         int u, v, weight;
         fscanf(fin, "%d %d %d", &u, &v, &weight);
-        graph_add_edge(g, u, v, weight);
+        graph_add_edge(g, u - 1, v - 1, weight);
     }
 
     fclose(fin);
 
-    unsigned int msp[n];
-    unsigned int msp_cost = prim(g, msp, starting_vertex);
+    Edge msp[n - 1];
+    int msp_cost = kruskal(g, msp, starting_vertex);
 
     graph_free(&g);
 
@@ -118,9 +100,9 @@ int main(int argc, char **argv)
     {
         if (sflag)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < m; i++)
             {
-                fprintf(fout, "(%d:%d) ", i + 1, msp[i]);
+                fprintf(fout, "(%d:%d) ", msp[i].u + 1, msp[i].v + 1);
                 fclose(fout);
             }
         }
@@ -130,12 +112,9 @@ int main(int argc, char **argv)
     }
     if (sflag)
     {
-        for (int i = 0; i < n; i++)
-        {
-            if (msp[i] == -1)
-                continue;
-            printf("(%d,%d) ", i + 1, msp[i] + 1);
-        }
+        for (int i = 0; i < n - 1; i++)
+            printf("(%d,%d) ", msp[i].u + 1, msp[i].v + 1);
+
         printf("\n");
     }
     else
