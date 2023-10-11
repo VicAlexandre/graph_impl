@@ -26,7 +26,7 @@ unsigned int *dijkstra(Graph *g, int src)
 
     MinHeap *heap = min_heap_init(graph_num_vertices(g), dist);
     if (heap == NULL)
-        return -1;
+        return 0;
 
     while (!min_heap_is_empty(heap))
     {
