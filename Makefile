@@ -1,5 +1,5 @@
 make:
-	cd dijkstra && make && cd .. && cd prim && make && cd .. && cd kruskal && make
+	cd dijkstra && make comp_to_root && cd .. && cd prim && make comp_to_root && cd .. && cd kruskal && make comp_to_root && cd .. && cd bellman-ford && make comp_to_root
 
 clean:
-	cd dijkstra && make clean && cd .. && cd prim && make clean && cd .. && cd kruskal && make clean
+	rm dj pr kr bf

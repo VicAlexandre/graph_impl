@@ -19,5 +19,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 kruskal: lib
 	$(CC) $(CFLAGS) kruskal.c $(OBJ) -o kruskal
 
+comp_to_root: lib
+	$(CC) $(CFLAGS) kruskal.c $(OBJ) -o ../kr && make clean
+
 clean:
 	rm -f $(OBJ_DIR)/*.o kruskal
