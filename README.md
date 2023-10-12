@@ -21,21 +21,36 @@ The input file format is as follows:
 - [x] Prim's minimum spanning tree
 - [x] Kruskal's minimum spanning tree
 - [x] Heap optimization using an auxiliary array to track where each vertex is currently at the heap to enable O(1) weight update 
+- [x] Bellman-Ford's shortest path
 
 ### To do:
-- [ ] Bellman-Ford's shortest path
 
 ---
 
 ## Algorithms' usage
 
-### Dijkstra's Shortest Path
-To build and run:
+### To build all algorithms:
+```bash
+make
+```
+
+This will build all algorithms and move them to the root directory named as `dj`, `bf`, `pr` and `kr`.
+
+### Dijkstra's and Bellman-Ford's Shortest Path
+To build and run Dijkstra's:
 ```bash
 cd dijkstra
 make
 ./dijkstra <options>
 ```
+
+To build and run Bellman-Ford's:
+```bash
+cd bellman-ford
+make
+./bellman-ford <options>
+```
+
 Options:
 ```bash
 -h              : displays this help and exits

@@ -19,5 +19,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 prim: lib
 	$(CC) $(CFLAGS) prim.c $(OBJ) -o prim
 
+comp_to_root: lib
+	$(CC) $(CFLAGS) prim.c $(OBJ) -o ../pr && make clean
+
 clean:
 	rm -f $(OBJ_DIR)/*.o prim
